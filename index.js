@@ -1,17 +1,11 @@
-const { fetchMyIP, fetchCoordsByIP } = require("./iss");
+const {nextISSTimesForMyLocation} = require("./iss");
 
-// fetchMyIP((err, data) => {
-//   if (err) {
-//     console.log("Error: ", err);
-//   } else {
-//     console.log("Data: ", data);
-//   }
-// });
-
-// fetchCoordsByIP("50.68.13.38", (err, data) => {
-//   if (err) {
-//     console.log("Error: ", err);
-//   } else {
-//     console.log("Data: ", data);
-//   }
-// });
+nextISSTimesForMyLocation((err, flyoverTimes) => {
+  if (err) {
+    console.log("Error: ", err);
+  } else {
+    flyoverTimes.forEach(t => {
+      console.log(`Next pass at ${Date(t.risetime).toLocaleString()} for ${t.duration} seconds!`);
+    });
+  }
+});
